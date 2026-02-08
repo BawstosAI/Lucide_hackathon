@@ -1,13 +1,13 @@
-import { Button } from '@/components/ui/button';
+import Image from 'next/image';
+import { BookOpen, Swords } from 'lucide-react';
+import type { AppMode } from '@/hooks/useAppMode';
 import { candidates } from '@/lib/candidates';
 
 interface WelcomeViewProps {
-  startButtonText: string;
-  onStartCall: () => void;
+  onStartCall: (mode: AppMode) => void;
 }
 
 export const WelcomeView = ({
-  startButtonText,
   onStartCall,
   ref,
 }: React.ComponentProps<'div'> & WelcomeViewProps) => {
@@ -32,29 +32,53 @@ export const WelcomeView = ({
         {/* Candidate avatar circles */}
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           {candidates.map((candidate) => (
-            <div key={candidate.id} className="flex flex-col items-center gap-1">
+            <div key={candidate.id} className="flex flex-col items-center gap-1.5">
               <div
-                className="flex size-11 items-center justify-center rounded-full font-serif text-xs font-bold text-white shadow-sm"
-                style={{ backgroundColor: candidate.color }}
+                className="size-14 overflow-hidden rounded-full shadow-sm ring-2 ring-offset-2"
+                style={{ '--tw-ring-color': candidate.color } as React.CSSProperties}
                 title={candidate.name}
               >
-                {candidate.initials}
+                <Image
+                  src={candidate.photo}
+                  alt={candidate.name}
+                  width={56}
+                  height={56}
+                  className="size-full object-cover"
+                />
               </div>
-              <span className="text-muted-foreground max-w-[60px] truncate text-[10px]">
+              <span className="text-muted-foreground max-w-[72px] truncate text-[10px]">
                 {candidate.lastName}
               </span>
             </div>
           ))}
         </div>
 
-        {/* CTA button */}
-        <Button
-          size="lg"
-          onClick={onStartCall}
-          className="mt-8 w-72 rounded-full font-mono text-xs font-bold tracking-wider uppercase"
-        >
-          {startButtonText}
-        </Button>
+        {/* Mode buttons */}
+        <div className="mt-8 flex w-full max-w-lg flex-col items-stretch gap-4 sm:flex-row sm:gap-6">
+          <button
+            onClick={() => onStartCall('inform')}
+            className="bg-card hover:border-primary/50 border-border group flex flex-1 cursor-pointer flex-col items-center gap-2 rounded-2xl border p-6 shadow-sm transition-all hover:shadow-md"
+          >
+            <BookOpen className="text-primary size-8" />
+            <span className="text-foreground font-serif text-lg font-semibold">
+              S&apos;informer
+            </span>
+            <span className="text-muted-foreground text-xs leading-relaxed">
+              Posez vos questions sur les candidats et leurs programmes
+            </span>
+          </button>
+
+          <button
+            onClick={() => onStartCall('debate')}
+            className="bg-card hover:border-primary/50 border-border group flex flex-1 cursor-pointer flex-col items-center gap-2 rounded-2xl border p-6 shadow-sm transition-all hover:shadow-md"
+          >
+            <Swords className="text-primary size-8" />
+            <span className="text-foreground font-serif text-lg font-semibold">Débattre</span>
+            <span className="text-muted-foreground text-xs leading-relaxed">
+              Confrontez vos idées avec un candidat de votre choix
+            </span>
+          </button>
+        </div>
       </section>
 
       {/* Footer disclaimer */}

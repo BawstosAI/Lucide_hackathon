@@ -13,19 +13,19 @@ candidats:
 
   gregoire:
     nom: "Emmanuel Grégoire"
-    url: ""  # coller ici l'URL du discours (YouTube, MP3, etc.)
+    url: "https://youtu.be/QFNrvxn9hO4?si=ZuqHQvlAyLhjuhFo"  # attention c'est une interview
     sample: ""
     status: pending
 
   chikirou:
     nom: "Sophia Chikirou"
-    url: ""
+    url: "https://youtu.be/Z8rZEcLOMk0?si=Tlevot0JeDE0h4nw"
     sample: ""
     status: pending
 
   bournazel:
     nom: "Pierre-Yves Bournazel"
-    url: ""
+    url: "https://youtu.be/Yl-2pfwI2_g?si=3R1733PqUpkuMzLe"
     sample: ""
     status: pending
 
@@ -37,6 +37,6 @@ candidats:
 
   mariani:
     nom: "Thierry Mariani"
-    url: ""
+    url: "https://youtu.be/dOjbFC_XCDA?si=jfLac0UwQInMrzX5" #interview
     sample: ""
     status: pending

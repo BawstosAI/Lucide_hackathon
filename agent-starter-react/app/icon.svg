@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Bleu France background -->
+  <circle cx="16" cy="16" r="16" fill="#002395"/>
+  <!-- Ballot box (white) -->
+  <rect x="8" y="15" width="16" height="11" rx="2" fill="white"/>
+  <!-- Slot in box -->
+  <rect x="11.5" y="14.5" width="9" height="2" rx="1" fill="#002395"/>
+  <!-- Ballot paper tilted going in -->
+  <g transform="rotate(-8 16 12)">
+    <rect x="12.5" y="5" width="7" height="10" rx="1" fill="white" stroke="#002395" stroke-width="0.8"/>
+    <!-- Tricolore on ballot -->
+    <rect x="12.5" y="5" width="2.33" height="10" fill="#002395" opacity="0.25" rx="0"/>
+    <rect x="17.17" y="5" width="2.33" height="10" fill="#ED2939" opacity="0.5" rx="0"/>
+  </g>
+  <!-- Tricolore band at bottom of box -->
+  <rect x="8" y="23" width="5.33" height="3" rx="0 0 2 0" fill="#002395" opacity="0.2"/>
+  <rect x="18.67" y="23" width="5.33" height="3" rx="0 0 0 0" fill="#ED2939" opacity="0.25"/>
+</svg>

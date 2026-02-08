@@ -9,7 +9,6 @@ export interface AppConfig {
   isPreConnectBufferEnabled: boolean;
 
   logo: string;
-  startButtonText: string;
   accent?: string;
   logoDark?: string;
   accentDark?: string;
@@ -35,8 +34,6 @@ export const APP_CONFIG_DEFAULTS: AppConfig = {
   accent: '#002395',
   logoDark: '/lk-logo-dark.svg',
   accentDark: '#4d7fff',
-  startButtonText: 'Démarrer la conversation',
-
   // agent dispatch configuration
   agentName: process.env.AGENT_NAME ?? undefined,
 

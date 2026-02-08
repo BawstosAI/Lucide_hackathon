@@ -16,6 +16,7 @@ import {
 } from '@/components/agents-ui/agent-control-bar';
 import { CandidateDashboard } from '@/components/app/candidate-dashboard';
 import { ChatTranscript } from '@/components/app/chat-transcript';
+import { useAppMode } from '@/hooks/useAppMode';
 import { useCandidateDetection } from '@/hooks/useCandidateDetection';
 import { cn } from '@/lib/shadcn/utils';
 import { Shimmer } from '../ai-elements/shimmer';
@@ -95,6 +96,7 @@ export const SessionView = ({
   const [chatOpen, setChatOpen] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const activeCandidateId = useCandidateDetection(messages);
+  const mode = useAppMode();
 
   const controls: AgentControlBarControls = {
     leave: true,
@@ -115,6 +117,26 @@ export const SessionView = ({
 
   return (
     <section className="bg-background relative z-10 h-svh w-svw overflow-hidden" {...props}>
+      {/* Mode badge */}
+      <div className="absolute top-4 left-4 z-20 md:top-5 md:left-6">
+        <span
+          className={cn(
+            'inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium',
+            mode === 'inform'
+              ? 'border-primary/30 bg-primary/10 text-primary'
+              : 'border-destructive/30 bg-destructive/10 text-destructive'
+          )}
+        >
+          <span
+            className={cn(
+              'size-1.5 rounded-full',
+              mode === 'inform' ? 'bg-primary' : 'bg-destructive'
+            )}
+          />
+          {mode === 'inform' ? 'Mode information' : 'Mode débat'}
+        </span>
+      </div>
+
       {/* Main content area */}
       <div className="flex h-full flex-col pt-14 pb-28 md:flex-row md:pt-16 md:pb-32">
         {/* Left/Top panel: Candidate Dashboard */}
@@ -125,7 +147,9 @@ export const SessionView = ({
           )}
         >
           <div className="mx-auto max-w-3xl py-4">
-            <h2 className="text-foreground mb-3 font-serif text-lg font-semibold">Les candidats</h2>
+            <h2 className="text-foreground mb-3 font-serif text-lg font-semibold">
+              {mode === 'inform' ? 'Les candidats' : 'Débat'}
+            </h2>
             <CandidateDashboard activeCandidateId={activeCandidateId} compact={chatOpen} />
           </div>
         </div>
