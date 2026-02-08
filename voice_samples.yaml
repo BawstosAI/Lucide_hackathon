@@ -1,0 +1,42 @@
+# ===========================================
+# Samples vocaux des candidats - Municipales Paris 2026
+# Pour chaque candidat, coller l'URL d'un discours YouTube/MP3.
+# Le script téléchargera le MP3 et créera un clone vocal via Gradio.
+# ===========================================
+
+candidats:
+  dati:
+    nom: "Rachida Dati"
+    url: ""  # déjà cloné — fichiers: rachida_dati_full.wav, rachida_dati_sample.wav
+    sample: "rachida_dati_sample.wav"
+    status: done
+
+  gregoire:
+    nom: "Emmanuel Grégoire"
+    url: ""  # coller ici l'URL du discours (YouTube, MP3, etc.)
+    sample: ""
+    status: pending
+
+  chikirou:
+    nom: "Sophia Chikirou"
+    url: ""
+    sample: ""
+    status: pending
+
+  bournazel:
+    nom: "Pierre-Yves Bournazel"
+    url: ""
+    sample: ""
+    status: pending
+
+  knafo:
+    nom: "Sarah Knafo"
+    url: "https://youtu.be/5qrMcb40ldM?si=oyY10Lymh6tq1gEs"
+    sample: ""
+    status: pending
+
+  mariani:
+    nom: "Thierry Mariani"
+    url: ""
+    sample: ""
+    status: pending

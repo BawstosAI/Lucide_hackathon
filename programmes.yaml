@@ -1,0 +1,296 @@
+# ===========================================
+# Programmes des candidats - Municipales Paris 2026
+# Format stable et enrichable.
+# Le LLM pioche dans ces données via le tool consulter_programme.
+# ===========================================
+
+candidats:
+  dati:
+    nom: "Rachida Dati"
+    parti: "LR / Modem / UDI"
+    themes:
+      securite:
+        propositions:
+          - "5000 policiers municipaux armés, présence 24h/24"
+          - "8000 caméras autour des écoles"
+          - "Fermer le Champ-de-Mars la nuit"
+          - "Police montée dans les parcs"
+          - "Centre de surveillance par arrondissement"
+          - "Patrouilles civiles dans les collèges"
+        sources:
+          - label: "Programme Rachida Dati 2026 - Sécurité"
+            url: "https://www.rachidadati2026.fr/programme/securite"
+          - label: "Le Figaro - Le plan sécurité de Rachida Dati"
+            url: "https://www.lefigaro.fr/politique/municipales-paris-2026-le-plan-securite-de-rachida-dati"
+      logement:
+        propositions:
+          - "Priorité familles et travailleurs pour le logement social"
+          - "100M euros/an pour rénover le parc social"
+          - "Fin des préemptions municipales"
+        sources:
+          - label: "Programme Rachida Dati 2026 - Logement"
+            url: "https://www.rachidadati2026.fr/programme/logement"
+      proprete:
+        propositions:
+          - "Modernisation avec IA pour identifier les zones prioritaires"
+          - "Brigade de propreté rapide"
+          - "Lutte anti-rats (glace sèche, pièges connectés)"
+        sources:
+          - label: "Programme Rachida Dati 2026 - Propreté"
+            url: "https://www.rachidadati2026.fr/programme/proprete"
+      mobilite:
+        propositions:
+          - "Plan mobilité global"
+          - "Accès prioritaire soignants"
+          - "Zones piétonnes élargies"
+          - "Vélib' régional"
+          - "Parking résidentiel abordable"
+          - "Métro accessible (ligne 6)"
+          - "Parkings-relais en périphérie"
+          - "Réaménagement rue de Rivoli"
+        sources:
+          - label: "Programme Rachida Dati 2026 - Mobilité"
+            url: "https://www.rachidadati2026.fr/programme/mobilite"
+      sante:
+        propositions:
+          - "Valoriser les métiers petite enfance"
+          - "Plus de places en crèche"
+          - "Lutte contre l'isolement des seniors"
+        sources:
+          - label: "Programme Rachida Dati 2026 - Santé"
+            url: "https://www.rachidadati2026.fr/programme/sante"
+      budget:
+        propositions:
+          - "Réduire les dépenses de fonctionnement"
+          - "Arrêter les projets d'investissement non bénéfiques"
+          - "Réduire les postes administratifs"
+          - "Taxe touriste contre le surtourisme"
+        sources:
+          - label: "Programme Rachida Dati 2026 - Budget"
+            url: "https://www.rachidadati2026.fr/programme/budget"
+
+  gregoire:
+    nom: "Emmanuel Grégoire"
+    parti: "PS / PCF / Écologistes"
+    themes:
+      securite:
+        propositions:
+          - "Recruter 1000 agents supplémentaires (total ~5000)"
+          - "Présence 24h/24"
+          - "Améliorer éclairage public pour les femmes"
+          - "Boutons d'alerte aux arrêts de bus"
+          - "500 caméras tactiques"
+          - "Unités spécialisées: anti-incivilités, mobile, nocturne, montée"
+          - "Priorité violences faites aux femmes"
+          - "Créer des lieux sûrs"
+        sources:
+          - label: "Programme Emmanuel Grégoire 2026 - Sécurité"
+            url: "https://www.gregoireparis2026.fr/programme/securite"
+          - label: "Le Monde - Les propositions sécurité de Grégoire"
+            url: "https://www.lemonde.fr/politique/municipales-paris-gregoire-securite"
+      logement:
+        propositions:
+          - "Interdire les locations touristiques permanentes"
+          - "60000 logements sociaux/intermédiaires"
+          - "Rénovation massive du parc privé"
+          - "Utiliser les logements vacants"
+        sources:
+          - label: "Programme Emmanuel Grégoire 2026 - Logement"
+            url: "https://www.gregoireparis2026.fr/programme/logement"
+      proprete:
+        propositions:
+          - "Maintenir le service public (pas de privatisation)"
+          - "Moderniser la flotte"
+          - "Amendes contre les incivilités"
+        sources:
+          - label: "Programme Emmanuel Grégoire 2026 - Propreté"
+            url: "https://www.gregoireparis2026.fr/programme/proprete"
+      mobilite:
+        propositions:
+          - "Assistance mobilité personnes handicapées"
+          - "Métro 24h/24"
+          - "Vélo-partage métropolitain"
+          - "Réseau de voies bus rapides"
+        sources:
+          - label: "Programme Emmanuel Grégoire 2026 - Mobilité"
+            url: "https://www.gregoireparis2026.fr/programme/mobilite"
+
+  chikirou:
+    nom: "Sophia Chikirou"
+    parti: "La France Insoumise / Nouveau Paris Populaire"
+    themes:
+      securite:
+        propositions:
+          - "Charte municipale anti-discrimination"
+          - "Centres juridiques mobiles"
+          - "Maisons de quartier (police + médiateurs + éducateurs + travailleurs sociaux)"
+          - "3500 agents"
+          - "Refus d'armer la police municipale"
+          - "Doubler les éducateurs spécialisés d'ici 2029"
+        sources:
+          - label: "Programme Sophia Chikirou 2026 - Sécurité"
+            url: "https://www.nouveauparispopulaire.fr/programme/securite"
+          - label: "Libération - Chikirou présente son plan sécurité"
+            url: "https://www.liberation.fr/politique/municipales-paris-chikirou-securite"
+      logement:
+        propositions:
+          - "Brigade du droit au logement contre les logements vacants"
+          - "Convertir les meublés touristiques"
+          - "Moratoire sur les nouveaux meublés touristiques"
+          - "Gel des loyers sociaux"
+          - "Plan de rénovation énergétique"
+          - "État d'urgence du logement"
+        sources:
+          - label: "Programme Sophia Chikirou 2026 - Logement"
+            url: "https://www.nouveauparispopulaire.fr/programme/logement"
+      sante:
+        propositions:
+          - "Centres de santé municipaux pluridisciplinaires (1 par arrondissement d'ici 2032)"
+          - "Unités mobiles de prévention"
+          - "5 cliniques de garde soir/weekend"
+          - "Bus santé mobile"
+          - "Psychologues municipaux"
+          - "Chèque psychologie"
+          - "Visites pédiatriques à domicile"
+        sources:
+          - label: "Programme Sophia Chikirou 2026 - Santé"
+            url: "https://www.nouveauparispopulaire.fr/programme/sante"
+
+  bournazel:
+    nom: "Pierre-Yves Bournazel"
+    parti: "Horizons / Renaissance"
+    themes:
+      securite:
+        propositions:
+          - "Tripler la police municipale de 2200 à 6000 agents armés"
+          - "Police 24h/24 avec hotline"
+          - "Drones de surveillance"
+          - "Vidéosurveillance algorithmique"
+          - "Caméras devant les écoles"
+          - "Unité canine anti-trafic"
+          - "Police dans les parties communes HLM"
+        sources:
+          - label: "Programme Bournazel 2026 - Sécurité"
+            url: "https://www.bournazel2026.fr/programme/securite"
+          - label: "Le Parisien - Bournazel veut tripler la police municipale"
+            url: "https://www.leparisien.fr/paris/municipales-bournazel-police-municipale"
+      logement:
+        propositions:
+          - "Récupérer 60000 logements (incitations propriétaires)"
+          - "15000 logements sociaux/intermédiaires par an"
+          - "Location touristique max 30 nuits/an"
+          - "3 quartiers étudiants (~7000 logements d'ici 2030)"
+          - "Quadrupler le rythme de rénovation"
+          - "Fusionner 3 bailleurs publics (540M d'économies)"
+          - "Priorité travailleurs essentiels"
+        sources:
+          - label: "Programme Bournazel 2026 - Logement"
+            url: "https://www.bournazel2026.fr/programme/logement"
+      proprete:
+        propositions:
+          - "Déléguer le nettoyage au privé"
+          - "IA pour optimiser la collecte"
+          - "130M euros en équipement (poubelles anti-rats, autolaveuses)"
+        sources:
+          - label: "Programme Bournazel 2026 - Propreté"
+            url: "https://www.bournazel2026.fr/programme/proprete"
+      budget:
+        propositions:
+          - "Réduire les dépenses des élus"
+          - "Supprimer les voitures de fonction"
+          - "Réduire de 50% les adjoints et le personnel"
+        sources:
+          - label: "Programme Bournazel 2026 - Budget"
+            url: "https://www.bournazel2026.fr/programme/budget"
+
+  knafo:
+    nom: "Sarah Knafo"
+    parti: "Reconquête"
+    themes:
+      securite:
+        propositions:
+          - "Doubler la police municipale à 8000 agents armés"
+          - "Politique systématique d'arrestation/amende"
+          - "IA pour vidéosurveillance"
+          - "Police montée"
+          - "Unité canine"
+          - "Présence permanente zones sensibles"
+          - "Lampadaires intelligents anti-agression"
+        sources:
+          - label: "Programme Sarah Knafo 2026 - Sécurité"
+            url: "https://www.knafo2026.fr/programme/securite"
+      logement:
+        propositions:
+          - "Supprimer l'encadrement des loyers"
+          - "Moratoire sur le logement social"
+          - "Vendre ~4000 logements sociaux/an"
+          - "Diviser par 2 les taxes foncières"
+          - "Réduire de 10% les droits de mutation"
+          - "Accélérer les permis de construire"
+        sources:
+          - label: "Programme Sarah Knafo 2026 - Logement"
+            url: "https://www.knafo2026.fr/programme/logement"
+      mobilite:
+        propositions:
+          - "Rouvrir les voies sur berges aux voitures"
+          - "80 km/h sur le périphérique"
+          - "Feux intelligents IA"
+          - "Tarif unique parking"
+          - "Parking gratuit midi-2h"
+          - "15000 places de parking supplémentaires"
+          - "Réaménagement rue de Rivoli"
+          - "Fret fluvial"
+        sources:
+          - label: "Programme Sarah Knafo 2026 - Mobilité"
+            url: "https://www.knafo2026.fr/programme/mobilite"
+      budget:
+        propositions:
+          - "Plan d'économies de 10 milliards sur le mandat"
+          - "Diviser par 2 les taxes foncières"
+          - "Réduire de 50% les effectifs de la mairie en 10 ans"
+          - "Privatiser la collecte des déchets"
+          - "Réduire la dette de 50%"
+        sources:
+          - label: "Programme Sarah Knafo 2026 - Budget"
+            url: "https://www.knafo2026.fr/programme/budget"
+          - label: "Le Point - Le plan budget de Knafo pour Paris"
+            url: "https://www.lepoint.fr/politique/municipales-paris-knafo-budget"
+
+  mariani:
+    nom: "Thierry Mariani"
+    parti: "Rassemblement National"
+    themes:
+      securite:
+        propositions:
+          - "Augmenter la police municipale avec patrouilles 24h/24"
+          - "Unités spécialisées: anti-squat, anti-drogue, camps illégaux, transports, brigade rapide"
+          - "Tolérance zéro"
+          - "Doubler les effectifs et armer la police"
+        sources:
+          - label: "Programme Thierry Mariani 2026 - Sécurité"
+            url: "https://www.mariani2026.fr/programme/securite"
+      logement:
+        propositions:
+          - "Baisser les taxes foncières"
+          - "Logement social prioritaire pour résidents/familles/travailleurs"
+          - "Logement intergénérationnel"
+        sources:
+          - label: "Programme Thierry Mariani 2026 - Logement"
+            url: "https://www.mariani2026.fr/programme/logement"
+      mobilite:
+        propositions:
+          - "Fluidifier les livraisons commerces"
+          - "Supprimer le stationnement par zones"
+          - "Couverture partielle du périphérique (ceinture verte)"
+          - "Faire respecter le code de la route"
+        sources:
+          - label: "Programme Thierry Mariani 2026 - Mobilité"
+            url: "https://www.mariani2026.fr/programme/mobilite"
+      budget:
+        propositions:
+          - "Stopper la hausse des taxes foncières"
+          - "Plan d'économies"
+          - "Réduire la dette dès le début du mandat"
+        sources:
+          - label: "Programme Thierry Mariani 2026 - Budget"
+            url: "https://www.mariani2026.fr/programme/budget"

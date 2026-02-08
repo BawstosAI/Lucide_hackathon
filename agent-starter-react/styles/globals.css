@@ -1,0 +1,164 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@source "../node_modules/streamdown/dist/index.js";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --radius: 0.625rem;
+
+  /* French institutional palette - light mode */
+  --background: #ffffff;
+  --foreground: #0a1628;
+  --card: #ffffff;
+  --card-foreground: #0a1628;
+  --popover: #ffffff;
+  --popover-foreground: #0a1628;
+  --primary: #002395;
+  --primary-foreground: #ffffff;
+  --secondary: #f0f2f8;
+  --secondary-foreground: #0a1628;
+  --muted: #f0f2f8;
+  --muted-foreground: #5a6577;
+  --accent: #f0f2f8;
+  --accent-foreground: #0a1628;
+  --destructive: #ed2939;
+  --border: #d4d9e3;
+  --input: #d4d9e3;
+  --ring: #002395;
+  --chart-1: #002395;
+  --chart-2: #ed2939;
+  --chart-3: #0066cc;
+  --chart-4: #00a85a;
+  --chart-5: #ffd600;
+  --sidebar: #f8f9fb;
+  --sidebar-foreground: #0a1628;
+  --sidebar-primary: #002395;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f0f2f8;
+  --sidebar-accent-foreground: #0a1628;
+  --sidebar-border: #d4d9e3;
+  --sidebar-ring: #002395;
+
+  /* Tricolore */
+  --tricolore-blue: #002395;
+  --tricolore-white: #ffffff;
+  --tricolore-red: #ed2939;
+}
+
+.dark {
+  --background: #0a1628;
+  --foreground: #e8ecf4;
+  --card: #111d33;
+  --card-foreground: #e8ecf4;
+  --popover: #162340;
+  --popover-foreground: #e8ecf4;
+  --primary: #4d7fff;
+  --primary-foreground: #ffffff;
+  --secondary: #162340;
+  --secondary-foreground: #e8ecf4;
+  --muted: #162340;
+  --muted-foreground: #8895aa;
+  --accent: #1d2d4d;
+  --accent-foreground: #e8ecf4;
+  --destructive: #ff4d5e;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.15);
+  --ring: #4d7fff;
+  --chart-1: #4d7fff;
+  --chart-2: #ff4d5e;
+  --chart-3: #3d8dff;
+  --chart-4: #2dd97a;
+  --chart-5: #ffe033;
+  --sidebar: #111d33;
+  --sidebar-foreground: #e8ecf4;
+  --sidebar-primary: #4d7fff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #162340;
+  --sidebar-accent-foreground: #e8ecf4;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: #4d7fff;
+
+  --tricolore-blue: #4d7fff;
+  --tricolore-white: #e8ecf4;
+  --tricolore-red: #ff4d5e;
+}
+
+@theme inline {
+  --font-sans:
+    var(--font-public-sans), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-mono:
+    var(--font-commit-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  --font-serif: var(--font-source-serif), 'Georgia', 'Cambria', 'Times New Roman', serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* Tricolore stripe utility */
+.tricolore-stripe {
+  background: linear-gradient(
+    to right,
+    var(--tricolore-blue) 0%,
+    var(--tricolore-blue) 33.33%,
+    var(--tricolore-white) 33.33%,
+    var(--tricolore-white) 66.66%,
+    var(--tricolore-red) 66.66%,
+    var(--tricolore-red) 100%
+  );
+}
+
+/* Candidate glow animation */
+@keyframes candidate-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 8px var(--glow-color, #002395);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--glow-color, #002395);
+  }
+}
+
+.candidate-glow {
+  animation: candidate-glow 2s ease-in-out infinite;
+}
+
+@layer base {
+  * {
+    @apply border-foreground/20 outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

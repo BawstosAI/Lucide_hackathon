@@ -1,0 +1,33 @@
+# ===========================================
+# Lucide Agent Configuration
+# ===========================================
+
+# --- Agent ---
+agent_name: "lucide-agent"
+language: "fr"
+
+# --- LLM ---
+llm:
+  model: "openai/gpt-4.1-mini"
+
+# --- TTS (Gradium) ---
+# French voices: https://gradium.ai/api_docs.html
+# Feminine: Elise (b35yykvVppLXyw_l), Manon (p1fSBpcmVWngBqVd),
+#           Amelie (J4XbCGPYNMigXcfZ), Jade (3mM3xaoFjNMQa22C),
+#           Camille (w9V1722uEmTkWqnR), Sarah (-dOnYAX4N4GqSOee),
+#           Lea (QY_BJKHMElKDO12-), Marine (GmGF_3ETsY2Zq7_w)
+# Masculine: Olivier (vMYQUSzm6GRkJX6d), Leo (axlOaUiFyOZhy4nv),
+#            Adrien (0LMAi0x_YVG_GLeM), Thomas (8nsAoui8Y5RK9PYw),
+#            Antoine (hx1RAC4Lqd9xyTAr), Nicolas (mxcKXLymdLQCdlEq)
+tts:
+  voice_id: "q9xK5G0AnJVy6B5G"  # Rachida Dati (cloned)
+  # voice_id: "vMYQUSzm6GRkJX6d"  # Olivier
+  # voice_id: "J4XbCGPYNMigXcfZ"  # Amelie
+
+# --- STT (Gradium) ---
+stt:
+  sample_rate: 24000
+
+# --- Voice pipeline ---
+pipeline:
+  preemptive_generation: true

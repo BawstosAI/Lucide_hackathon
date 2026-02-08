@@ -1,0 +1,11 @@
+node_modules/
+.next/
+dist/
+.env
+.env.*
+venv/
+__pycache__/
+*.pyc
+*.wav
+*.mp3
+.claude/
