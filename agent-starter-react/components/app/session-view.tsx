@@ -151,11 +151,11 @@ export const SessionView = ({
       </div>
 
       {/* Main content area */}
-      <div className="flex h-full flex-col pt-14 pb-28 md:flex-row md:pt-16 md:pb-32">
+      <div className="flex h-full min-h-0 flex-col pt-14 pb-28 md:flex-row md:pt-16 md:pb-32">
         {/* Left/Top panel */}
         <div
           className={cn(
-            'overflow-y-auto px-4 transition-all duration-300 md:px-6',
+            'min-w-0 overflow-y-auto px-4 transition-all duration-300 md:px-6',
             chatOpen ? 'h-1/3 w-full md:h-full md:w-1/2 lg:w-2/5' : 'h-full w-full'
           )}
         >
@@ -209,7 +209,7 @@ export const SessionView = ({
 
         {/* Right panel: Chat Transcript */}
         {chatOpen && (
-          <div className="border-border h-2/3 w-full border-t md:h-full md:w-1/2 md:border-t-0 md:border-l lg:w-3/5">
+          <div className="border-border relative h-2/3 w-full overflow-hidden border-t md:h-full md:w-1/2 md:border-t-0 md:border-l lg:w-3/5">
             <ChatTranscript
               messages={messages}
               className="space-y-3 transition-opacity duration-300 ease-out"
