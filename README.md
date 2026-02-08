@@ -2,7 +2,7 @@
 
 An interactive voice assistant that helps citizens explore the 2026 Paris municipal elections. Ask questions about candidates and their platforms, or debate directly with a candidate's cloned voice.
 
-Built at the **Lucide Hackathon**.
+Built at the **Tech Europe Hackathon**.
 
 ## How it works
 
