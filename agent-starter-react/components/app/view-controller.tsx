@@ -1,5 +1,6 @@
 'use client';
 
+import { flushSync } from 'react-dom';
 import { AnimatePresence, motion } from 'motion/react';
 import { useSessionContext } from '@livekit/components-react';
 import type { AppConfig } from '@/app-config';
@@ -38,7 +39,7 @@ export function ViewController({ appConfig, mode, onModeChange }: ViewController
   const { isConnected, start } = useSessionContext();
 
   const handleStartCall = (selectedMode: AppMode) => {
-    onModeChange(selectedMode);
+    flushSync(() => onModeChange(selectedMode));
     start();
   };
 
