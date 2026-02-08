@@ -1,0 +1,40 @@
+[
+  {
+    "id": "dati",
+    "name": "Rachida Dati",
+    "uid": "q9xK5G0AnJVy6B5G",
+    "cloned": true
+  },
+  {
+    "id": "gregoire",
+    "name": "Emmanuel Grégoire",
+    "uid": "ua3biLoQYf7ut6pT",
+    "cloned": true
+  },
+  {
+    "id": "chikirou",
+    "name": "Sophia Chikirou",
+    "uid": "y6MRFbM60dD1bQJj",
+    "cloned": true
+  },
+  {
+    "id": "bournazel",
+    "name": "Pierre-Yves Bournazel",
+    "uid": "GuJUj6hfQsZ37zm5",
+    "cloned": true
+  },
+  {
+    "id": "knafo",
+    "name": "Sarah Knafo",
+    "uid": "b35yykvVppLXyw_l",
+    "cloned": false,
+    "note": "VOIX TEMPORAIRE - catalogue Gradium 'Elise' (femme FR) - limite de clones atteinte"
+  },
+  {
+    "id": "mariani",
+    "name": "Thierry Mariani",
+    "uid": "axlOaUiFyOZhy4nv",
+    "cloned": false,
+    "note": "VOIX TEMPORAIRE - catalogue Gradium 'Leo' (homme FR) - limite de clones atteinte"
+  }
+]
