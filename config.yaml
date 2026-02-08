@@ -20,9 +20,7 @@ llm:
 #            Adrien (0LMAi0x_YVG_GLeM), Thomas (8nsAoui8Y5RK9PYw),
 #            Antoine (hx1RAC4Lqd9xyTAr), Nicolas (mxcKXLymdLQCdlEq)
 tts:
-  voice_id: "q9xK5G0AnJVy6B5G"  # Rachida Dati (cloned)
-  # voice_id: "vMYQUSzm6GRkJX6d"  # Olivier
-  # voice_id: "J4XbCGPYNMigXcfZ"  # Amelie
+  voice_id: "vMYQUSzm6GRkJX6d"  # Olivier (voix neutre par défaut)
 
 # --- STT (Gradium) ---
 stt:

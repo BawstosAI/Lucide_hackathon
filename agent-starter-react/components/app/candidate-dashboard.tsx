@@ -6,12 +6,14 @@ import { cn } from '@/lib/shadcn/utils';
 
 interface CandidateDashboardProps {
   activeCandidateId: string | null;
+  isSpeaking?: boolean;
   compact?: boolean;
   className?: string;
 }
 
 export function CandidateDashboard({
   activeCandidateId,
+  isSpeaking = false,
   compact = false,
   className,
 }: CandidateDashboardProps) {
@@ -28,6 +30,7 @@ export function CandidateDashboard({
           key={candidate.id}
           candidate={candidate}
           isActive={activeCandidateId === candidate.id}
+          isSpeaking={activeCandidateId === candidate.id && isSpeaking}
           compact={compact}
         />
       ))}

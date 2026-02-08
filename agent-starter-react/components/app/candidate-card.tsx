@@ -7,17 +7,23 @@ import { cn } from '@/lib/shadcn/utils';
 interface CandidateCardProps {
   candidate: Candidate;
   isActive: boolean;
+  isSpeaking?: boolean;
   compact?: boolean;
 }
 
-export function CandidateCard({ candidate, isActive, compact = false }: CandidateCardProps) {
+export function CandidateCard({
+  candidate,
+  isActive,
+  isSpeaking = false,
+  compact = false,
+}: CandidateCardProps) {
   return (
     <motion.div
       layout
       animate={isActive ? { scale: 1.03 } : { scale: 1 }}
       transition={{ type: 'spring', stiffness: 400, damping: 25 }}
       className={cn(
-        'bg-card text-card-foreground relative flex items-center gap-3 overflow-hidden rounded-lg border transition-shadow duration-300',
+        'bg-card text-card-foreground relative flex items-center gap-3 overflow-hidden rounded-lg border transition-all duration-300',
         compact ? 'p-2' : 'p-3',
         isActive && 'candidate-glow'
       )}
@@ -25,7 +31,9 @@ export function CandidateCard({ candidate, isActive, compact = false }: Candidat
         isActive
           ? {
               borderColor: candidate.color,
-              boxShadow: `0 0 16px ${candidate.color}40, 0 0 4px ${candidate.color}20`,
+              boxShadow: isSpeaking
+                ? `0 0 24px ${candidate.color}60, 0 0 8px ${candidate.color}30`
+                : `0 0 16px ${candidate.color}40, 0 0 4px ${candidate.color}20`,
             }
           : undefined
       }
@@ -40,7 +48,12 @@ export function CandidateCard({ candidate, isActive, compact = false }: Candidat
       <img
         src={candidate.photo}
         alt={candidate.name}
-        className={cn('shrink-0 rounded-full object-cover', compact ? 'size-8' : 'size-10')}
+        className={cn(
+          'shrink-0 rounded-full object-cover ring-2 transition-all duration-300',
+          compact ? 'size-8' : 'size-10',
+          isSpeaking ? 'ring-offset-2' : 'ring-transparent'
+        )}
+        style={isSpeaking ? { ['--tw-ring-color' as string]: candidate.color } : undefined}
       />
 
       {/* Name & party */}
@@ -53,7 +66,7 @@ export function CandidateCard({ candidate, isActive, compact = false }: Candidat
         </p>
       </div>
 
-      {/* Active indicator pulse */}
+      {/* Speaking indicator pulse — only when agent is actively voicing this candidate */}
       {isActive && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -61,12 +74,14 @@ export function CandidateCard({ candidate, isActive, compact = false }: Candidat
           className="mr-1 size-2 shrink-0 rounded-full"
           style={{ backgroundColor: candidate.color }}
         >
-          <motion.div
-            animate={{ scale: [1, 1.8, 1], opacity: [1, 0, 1] }}
-            transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
-            className="size-full rounded-full"
-            style={{ backgroundColor: candidate.color }}
-          />
+          {isSpeaking && (
+            <motion.div
+              animate={{ scale: [1, 1.8, 1], opacity: [1, 0, 1] }}
+              transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
+              className="size-full rounded-full"
+              style={{ backgroundColor: candidate.color }}
+            />
+          )}
         </motion.div>
       )}
     </motion.div>

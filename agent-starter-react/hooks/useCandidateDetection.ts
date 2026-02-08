@@ -15,20 +15,20 @@ function getMessageText(m: ReceivedMessage): string {
 }
 
 /**
- * Scans the last N agent messages for candidate last names
+ * Scans the last N messages (user + agent) for candidate last names
  * and returns the matching candidate ID, or null if none found.
+ *
+ * With the incarnation system, the candidate name typically appears
+ * in the user's question (e.g. "Rachida Dati, que proposes-tu ?")
+ * while the agent responds in 1st person without repeating the name.
  */
 export function useCandidateDetection(
   messages: ReceivedMessage[],
-  lookback: number = 3
+  lookback: number = 5
 ): string | null {
   return useMemo(() => {
-    // Filter to agent transcript messages (not from local user)
-    const agentMessages = messages
-      .filter((m) => m.type === 'agentTranscript' || (m.from && !m.from.isLocal))
-      .slice(-lookback);
-
-    const text = agentMessages.map(getMessageText).join(' ').toLowerCase();
+    const recent = messages.slice(-lookback);
+    const text = recent.map(getMessageText).join(' ').toLowerCase();
 
     if (!text) return null;
 

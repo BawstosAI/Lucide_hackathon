@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useSessionContext } from '@livekit/components-react';
 import type { AppConfig } from '@/app-config';
@@ -31,14 +30,15 @@ const VIEW_MOTION_PROPS = {
 
 interface ViewControllerProps {
   appConfig: AppConfig;
+  mode: AppMode;
+  onModeChange: (mode: AppMode) => void;
 }
 
-export function ViewController({ appConfig }: ViewControllerProps) {
+export function ViewController({ appConfig, mode, onModeChange }: ViewControllerProps) {
   const { isConnected, start } = useSessionContext();
-  const [mode, setMode] = useState<AppMode>('inform');
 
   const handleStartCall = (selectedMode: AppMode) => {
-    setMode(selectedMode);
+    onModeChange(selectedMode);
     start();
   };
 

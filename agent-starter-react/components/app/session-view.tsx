@@ -10,6 +10,7 @@ import {
 import type { AgentState } from '@livekit/components-react';
 import type { AppConfig } from '@/app-config';
 import { AgentAudioVisualizerBar } from '@/components/agents-ui/agent-audio-visualizer-bar';
+import { AgentAudioVisualizerRadial } from '@/components/agents-ui/agent-audio-visualizer-radial';
 import {
   AgentControlBar,
   type AgentControlBarControls,
@@ -69,17 +70,28 @@ const SHIMMER_MOTION_PROPS = {
   exit: 'hidden',
 };
 
-const AGENT_STATE_LABELS: Record<string, string> = {
-  connecting: 'Connexion...',
-  initializing: 'Initialisation...',
-  listening: 'Écoute...',
-  thinking: 'Réflexion...',
-  speaking: 'Parle...',
+const AGENT_STATE_LABELS: Record<string, Record<string, string>> = {
+  inform: {
+    connecting: 'Connexion...',
+    initializing: 'Initialisation...',
+    listening: 'Écoute...',
+    thinking: 'Réflexion...',
+    speaking: 'Parle...',
+  },
+  debate: {
+    connecting: 'Connexion...',
+    initializing: 'Préparation du débat...',
+    listening: 'À vous...',
+    thinking: 'Prépare sa réplique...',
+    speaking: 'Contre-argumente...',
+  },
 };
 
-function getAgentStateLabel(state: AgentState | undefined): string {
+const DEBATE_THEMES = ['Sécurité', 'Logement', 'Mobilité', 'Propreté', 'Santé', 'Budget'];
+
+function getAgentStateLabel(state: AgentState | undefined, mode: string): string {
   if (!state) return '';
-  return AGENT_STATE_LABELS[state] ?? '';
+  return AGENT_STATE_LABELS[mode]?.[state] ?? AGENT_STATE_LABELS.inform[state] ?? '';
 }
 
 interface SessionViewProps {
@@ -93,10 +105,11 @@ export const SessionView = ({
   const session = useSessionContext();
   const { messages } = useSessionMessages(session);
   const { state: agentState, audioTrack: agentAudioTrack } = useVoiceAssistant();
-  const [chatOpen, setChatOpen] = useState(false);
+  const mode = useAppMode();
+  const [chatOpen, setChatOpen] = useState(mode === 'debate');
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const activeCandidateId = useCandidateDetection(messages);
-  const mode = useAppMode();
+  const isDebate = mode === 'debate';
 
   const controls: AgentControlBarControls = {
     leave: true,
@@ -139,19 +152,59 @@ export const SessionView = ({
 
       {/* Main content area */}
       <div className="flex h-full flex-col pt-14 pb-28 md:flex-row md:pt-16 md:pb-32">
-        {/* Left/Top panel: Candidate Dashboard */}
+        {/* Left/Top panel */}
         <div
           className={cn(
             'overflow-y-auto px-4 transition-all duration-300 md:px-6',
             chatOpen ? 'h-1/3 w-full md:h-full md:w-1/2 lg:w-2/5' : 'h-full w-full'
           )}
         >
-          <div className="mx-auto max-w-3xl py-4">
-            <h2 className="text-foreground mb-3 font-serif text-lg font-semibold">
-              {mode === 'inform' ? 'Les candidats' : 'Débat'}
-            </h2>
-            <CandidateDashboard activeCandidateId={activeCandidateId} compact={chatOpen} />
-          </div>
+          {isDebate ? (
+            /* Debate center stage */
+            <div className="flex h-full flex-col items-center justify-center gap-6">
+              <div className="text-destructive relative">
+                <AgentAudioVisualizerRadial
+                  size="lg"
+                  barCount={24}
+                  state={agentState}
+                  audioTrack={agentAudioTrack}
+                  className="text-destructive"
+                />
+                {/* Center label inside the radial */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                  <span className="text-destructive/80 text-xs font-medium tracking-widest uppercase">
+                    Débat
+                  </span>
+                  <span className="text-foreground font-serif text-lg font-bold">
+                    {getAgentStateLabel(agentState, mode)}
+                  </span>
+                </div>
+              </div>
+              {/* Theme pills */}
+              <div className="flex flex-wrap justify-center gap-2">
+                {DEBATE_THEMES.map((theme) => (
+                  <span
+                    key={theme}
+                    className="border-destructive/20 bg-destructive/5 text-destructive rounded-full border px-3 py-1 text-xs font-medium"
+                  >
+                    {theme}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : (
+            /* Inform mode: Candidate Dashboard */
+            <div className="mx-auto max-w-3xl py-4">
+              <h2 className="text-foreground mb-3 font-serif text-lg font-semibold">
+                Les candidats
+              </h2>
+              <CandidateDashboard
+                activeCandidateId={activeCandidateId}
+                isSpeaking={agentState === 'speaking'}
+                compact={chatOpen}
+              />
+            </div>
+          )}
         </div>
 
         {/* Right panel: Chat Transcript */}
@@ -200,12 +253,20 @@ export const SessionView = ({
                   className={cn([
                     'bg-muted min-h-1.5 w-1.5 rounded-full',
                     'origin-center transition-colors duration-250 ease-linear',
-                    'data-[lk-highlighted=true]:bg-primary data-[lk-muted=true]:bg-muted',
+                    isDebate
+                      ? 'data-[lk-highlighted=true]:bg-destructive'
+                      : 'data-[lk-highlighted=true]:bg-primary',
+                    'data-[lk-muted=true]:bg-muted',
                   ])}
                 />
               </AgentAudioVisualizerBar>
-              <span className="text-muted-foreground text-xs font-medium">
-                {getAgentStateLabel(agentState)}
+              <span
+                className={cn(
+                  'text-xs font-medium',
+                  isDebate ? 'text-destructive/70' : 'text-muted-foreground'
+                )}
+              >
+                {getAgentStateLabel(agentState, mode)}
               </span>
             </div>
 
