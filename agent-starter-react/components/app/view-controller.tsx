@@ -1,6 +1,5 @@
 'use client';
 
-import { flushSync } from 'react-dom';
 import { AnimatePresence, motion } from 'motion/react';
 import { useSessionContext } from '@livekit/components-react';
 import type { AppConfig } from '@/app-config';
@@ -32,22 +31,17 @@ const VIEW_MOTION_PROPS = {
 interface ViewControllerProps {
   appConfig: AppConfig;
   mode: AppMode;
-  onModeChange: (mode: AppMode) => void;
+  onStartSession: (mode: AppMode) => void;
 }
 
-export function ViewController({ appConfig, mode, onModeChange }: ViewControllerProps) {
-  const { isConnected, start } = useSessionContext();
-
-  const handleStartCall = (selectedMode: AppMode) => {
-    flushSync(() => onModeChange(selectedMode));
-    start();
-  };
+export function ViewController({ appConfig, mode, onStartSession }: ViewControllerProps) {
+  const { isConnected } = useSessionContext();
 
   return (
     <AnimatePresence mode="wait">
       {/* Welcome view */}
       {!isConnected && (
-        <MotionWelcomeView key="welcome" {...VIEW_MOTION_PROPS} onStartCall={handleStartCall} />
+        <MotionWelcomeView key="welcome" {...VIEW_MOTION_PROPS} onStartCall={onStartSession} />
       )}
       {/* Session view */}
       {isConnected && (

@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { TokenSource } from 'livekit-client';
 import { useSession } from '@livekit/components-react';
 import { WarningIcon } from '@phosphor-icons/react/dist/ssr';
@@ -29,6 +29,7 @@ interface AppProps {
 
 export function App({ appConfig }: AppProps) {
   const [mode, setMode] = useState<AppMode>('inform');
+  const [pendingStart, setPendingStart] = useState(false);
 
   const tokenSource = useMemo(() => {
     return typeof process.env.NEXT_PUBLIC_CONN_DETAILS_ENDPOINT === 'string'
@@ -41,11 +42,25 @@ export function App({ appConfig }: AppProps) {
     participantMetadata: JSON.stringify({ mode }),
   });
 
+  // Start session AFTER useSession's internal effects have updated the metadata ref
+  useEffect(() => {
+    if (pendingStart) {
+      setPendingStart(false);
+      session.start();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pendingStart]);
+
+  const handleStartSession = useCallback((selectedMode: AppMode) => {
+    setMode(selectedMode);
+    setPendingStart(true);
+  }, []);
+
   return (
     <AgentSessionProvider session={session}>
       <AppSetup />
       <main className="grid h-svh grid-cols-1 place-content-center">
-        <ViewController appConfig={appConfig} mode={mode} onModeChange={setMode} />
+        <ViewController appConfig={appConfig} mode={mode} onStartSession={handleStartSession} />
       </main>
       <StartAudioButton label="Start Audio" />
       <Toaster
