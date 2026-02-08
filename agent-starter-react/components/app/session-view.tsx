@@ -277,7 +277,6 @@ export const SessionView = ({
                 controls={controls}
                 isChatOpen={chatOpen}
                 isConnected={session.isConnected}
-                onDisconnect={session.end}
                 onIsChatOpenChange={setChatOpen}
               />
             </div>

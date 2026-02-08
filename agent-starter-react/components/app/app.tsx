@@ -12,7 +12,6 @@ import { Toaster } from '@/components/ui/sonner';
 import { useAgentErrors } from '@/hooks/useAgentErrors';
 import type { AppMode } from '@/hooks/useAppMode';
 import { useDebugMode } from '@/hooks/useDebug';
-import { getSandboxTokenSource } from '@/lib/utils';
 
 const IN_DEVELOPMENT = process.env.NODE_ENV !== 'production';
 
@@ -30,16 +29,53 @@ interface AppProps {
 export function App({ appConfig }: AppProps) {
   const [mode, setMode] = useState<AppMode>('inform');
   const [pendingStart, setPendingStart] = useState(false);
+  const modeRef = useRef<AppMode>(mode);
+
+  useEffect(() => {
+    modeRef.current = mode;
+  }, [mode]);
 
   const tokenSource = useMemo(() => {
-    return typeof process.env.NEXT_PUBLIC_CONN_DETAILS_ENDPOINT === 'string'
-      ? getSandboxTokenSource(appConfig)
-      : TokenSource.endpoint('/api/connection-details');
-  }, [appConfig]);
+    const useSandboxEndpoint = typeof process.env.NEXT_PUBLIC_CONN_DETAILS_ENDPOINT === 'string';
+    const endpoint = useSandboxEndpoint
+      ? process.env.NEXT_PUBLIC_CONN_DETAILS_ENDPOINT!
+      : '/api/connection-details';
+    const sandboxId = appConfig.sandboxId ?? '';
+
+    // Keep token-source fetch options stable and send mode in request body to avoid stale-token reuse.
+    return TokenSource.custom(async () => {
+      const roomConfig = appConfig.agentName
+        ? {
+            agents: [{ agent_name: appConfig.agentName }],
+          }
+        : undefined;
+
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+      };
+      if (useSandboxEndpoint && sandboxId) {
+        headers['X-Sandbox-Id'] = sandboxId;
+      }
+
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+          room_config: roomConfig,
+          participant_metadata: JSON.stringify({ mode: modeRef.current }),
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error(`Error fetching connection details: ${res.status} / ${await res.text()}`);
+      }
+
+      return await res.json();
+    });
+  }, [appConfig.agentName, appConfig.sandboxId]);
 
   const session = useSession(tokenSource, {
     ...(appConfig.agentName ? { agentName: appConfig.agentName } : {}),
-    participantMetadata: JSON.stringify({ mode }),
     agentConnectTimeoutMilliseconds: 15_000,
   });
 
