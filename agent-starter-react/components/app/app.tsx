@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { TokenSource } from 'livekit-client';
 import { useSession } from '@livekit/components-react';
 import { WarningIcon } from '@phosphor-icons/react/dist/ssr';
@@ -40,13 +40,31 @@ export function App({ appConfig }: AppProps) {
   const session = useSession(tokenSource, {
     ...(appConfig.agentName ? { agentName: appConfig.agentName } : {}),
     participantMetadata: JSON.stringify({ mode }),
+    agentConnectTimeoutMilliseconds: 15_000,
   });
+
+  const startingRef = useRef(false);
 
   // Start session AFTER useSession's internal effects have updated the metadata ref
   useEffect(() => {
     if (pendingStart) {
       setPendingStart(false);
-      session.start();
+      if (startingRef.current) return;
+      startingRef.current = true;
+
+      (async () => {
+        try {
+          // Force-end any lingering session before starting fresh
+          if (session.connectionState !== 'disconnected') {
+            await session.end();
+          }
+          await session.start();
+        } catch (err) {
+          console.error('[App] session.start() failed:', err);
+        } finally {
+          startingRef.current = false;
+        }
+      })();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pendingStart]);
